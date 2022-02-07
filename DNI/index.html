@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" id="form">
+        <input type="text" max="9" id="dni" name="dni" placeholder="Inserte DNI 99999999-A" pattern="[0-9]{8}-[A-Za-z]{1}">
+        <input type="submit" value="Comprobar" >
+    </form>
+    <p id="respuesta"></p>
+    <script>
+        let formulario = document.getElementById("form");
+        let dni = document.getElementById("dni");
+        let respuesta = document.getElementById("respuesta");
+
+        formulario.onsubmit = function() {
+            fetch('http://localhost:3000/validador-dni?dni=' + dni.value)
+            .then(response => response.json())
+            .then(data => respuesta.textContent = data["respuesta"]);
+            return false;
+        };
+    </script>
+</body>
+
+</html>
